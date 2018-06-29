@@ -31,3 +31,36 @@ val abs_of_z = if z < 0 then 0 - z else  z;
 (* dynamic environment: abs_of_z-->70, q-->71, z-->70, y-->17, x-->34 *)
  
 val abs_of_z_simpler = abs z;
+
+(* 
+
+Comditionals
+
+Syntax:
+	if e1 then e2 else e3
+	where if, then, and else are keywords and
+	e1, e2, and e3 are subexpressions
+	
+Type-checking:
+	first e1 must have tpye boll
+	e2 and e3 can have any type (call it t), but they must have the same type t 
+	the tpye of the entire expression is also t
+	
+Evaluation rules:
+	first evaluate e1 to a value call it v1
+	if it's true, evaluate e2 and that result is the whole expression's result
+	else, evaluate e3 and that result is the whole expression's result
+=======
+
+Less-than comparison
+
+Syntax:
+	e1 < e2, where e1 and e2 are expressions
+
+Tpye-checking:
+	the type of the whole expression is bool iff e1 and e2 are int, else does not type-check
+
+Evaluation rules: 
+    evaluate entire expression to a bool
+
+*)
