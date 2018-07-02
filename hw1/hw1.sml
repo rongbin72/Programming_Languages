@@ -50,3 +50,21 @@ fun date_to_string(date : int*int*int) =
     in
         get_nth(months, #2 date) ^ " " ^ Int.toString(#3 date) ^ ", " ^ Int.toString(#1 date)
     end
+
+
+fun number_before_reaching_sum(sum : int, ls : int list) =
+    let
+        fun helper(current_sum : int, int_list : int list, index : int) =
+            if hd int_list + current_sum  >= sum
+            then index
+            else
+            helper(current_sum + hd int_list, tl int_list, index + 1)
+    in
+        helper(0, ls, 0)
+    end
+
+
+(* fun what_month(day : int) =
+    days_per_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    number_before_reaching_sum(day, days_per_month) *)
+    
