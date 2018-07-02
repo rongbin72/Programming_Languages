@@ -7,6 +7,7 @@ fun is_older(left : int*int*int, right : int*int*int) =
     then true
     else false
 
+
 (* if the date matches, add 1, else add nothing, just keep doing recursive calls *)
 fun number_in_month(dates : (int*int*int) list, month : int) =
     if null dates
@@ -15,10 +16,12 @@ fun number_in_month(dates : (int*int*int) list, month : int) =
     then 1 + number_in_month(tl dates, month)
     else number_in_month(tl dates, month)
 
+
 fun number_in_months(dates : (int*int*int) list, months : int list) =
     if null months
     then 0
     else number_in_month(dates, hd months) + number_in_months(dates, tl months)
+
 
 fun dates_in_month(dates : (int*int*int) list, month : int) =
     if null dates
@@ -27,12 +30,23 @@ fun dates_in_month(dates : (int*int*int) list, month : int) =
     then hd dates :: dates_in_month(tl dates, month)
     else dates_in_month(tl dates, month)
 
+
 fun dates_in_months(dates : (int*int*int) list, months : int list) = 
     if null months
     then []
     else dates_in_month(dates, hd months) @ dates_in_months(dates, tl months)
 
+
 fun get_nth(str : string list, n : int) =
     if n = 1
     then hd str
     else get_nth(tl str, n - 1)
+
+
+fun date_to_string(date : int*int*int) = 
+    let 
+        val months = ["January", "February", "March", "April", "May", "June","July",
+                      "August", "September", "October", "November", "December"]
+    in
+        get_nth(months, #2 date) ^ " " ^ Int.toString(#3 date) ^ ", " ^ Int.toString(#1 date)
+    end
