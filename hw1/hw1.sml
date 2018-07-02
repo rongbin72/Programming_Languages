@@ -57,8 +57,7 @@ fun number_before_reaching_sum(sum : int, ls : int list) =
         fun helper(current_sum : int, int_list : int list, index : int) =
             if hd int_list + current_sum  >= sum
             then index
-            else
-            helper(current_sum + hd int_list, tl int_list, index + 1)
+            else helper(current_sum + hd int_list, tl int_list, index + 1)
     in
         helper(0, ls, 0)
     end
@@ -70,3 +69,9 @@ fun what_month(day : int) =
     in
         number_before_reaching_sum(day, days_per_month) + 1
     end
+
+
+fun month_range(day1 : int, day2 : int) =
+    if day1 > day2
+    then []
+    else what_month(day1) :: month_range(day1 + 1, day2)
