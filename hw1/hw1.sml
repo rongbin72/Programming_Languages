@@ -75,3 +75,18 @@ fun month_range(day1 : int, day2 : int) =
     if day1 > day2
     then []
     else what_month(day1) :: month_range(day1 + 1, day2)
+
+
+fun oldest(dates : (int*int*int) list) =
+    let
+        fun max(current_oldest_date : int*int*int, date_ls : (int*int*int) list) =
+            if null date_ls
+            then SOME current_oldest_date
+            else if is_older(current_oldest_date, hd date_ls)
+            then max(current_oldest_date, tl date_ls)
+            else max(hd date_ls, tl date_ls)
+    in
+        if null dates
+        then NONE
+        else max(hd dates, tl dates)
+    end
