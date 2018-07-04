@@ -28,3 +28,19 @@ fun rev2 xs =
     in
         aux(xs,[])
     end
+
+
+fun fab1 n =
+    if n <= 2 then 1
+    else fab1 (n - 2) + fab1 (n - 1)
+
+
+(* tail recursion, much faster than the previous one when n is getting large ~40 *)
+fun fab2 n =
+    let
+        fun aux(n', acc1, acc2) =
+            if n' <= 2 then acc1
+            else aux(n' - 1, acc2, acc1 + acc2)
+    in
+        aux(n, 1, 2)
+    end
