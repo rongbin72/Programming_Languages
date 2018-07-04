@@ -8,6 +8,16 @@ fun same_string(s1 : string, s2 : string) =
 
 (* put your solutions for problem 1 here *)
 
+fun all_except_option(str, []) = NONE
+  | all_except_option(str, head :: tail) =
+        case (same_string(str, head), all_except_option(str, tail)) of
+            (true, _) => SOME(tail)
+          | (false, SOME(ls)) => SOME(head :: ls) 
+          | (false, NONE) => NONE
+
+
+
+
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
 datatype suit = Clubs | Diamonds | Hearts | Spades
