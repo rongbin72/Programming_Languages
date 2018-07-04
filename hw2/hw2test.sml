@@ -7,9 +7,9 @@ use "hw2provided.sml";
 
 val test1 = all_except_option ("string", ["abc", "string", "123"]) = SOME ["abc", "123"]
 
-(* val test2 = get_substitutions1 ([["foo"],["there"]], "foo") = [] *)
+val test2 = get_substitutions1 ([["foo", "head"],["neck", "foo"], ["tail", "foo"]], "foo") = ["head", "neck", "tail"]
 
-(* val test3 = get_substitutions2 ([["foo"],["there"]], "foo") = [] *)
+val test3 = get_substitutions2 ([["foo", "head"],["neck", "foo"], ["tail", "foo"]], "foo") = ["head", "neck", "tail"]
 
 (* val test4 = similar_names ([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], {first="Fred", middle="W", last="Smith"}) =
 	    [{first="Fred", last="Smith", middle="W"}, {first="Fredrick", last="Smith", middle="W"},

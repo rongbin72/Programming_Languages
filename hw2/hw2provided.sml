@@ -16,6 +16,25 @@ fun all_except_option(str, []) = NONE
           | (false, NONE) => NONE
 
 
+fun get_substitutions1([], s) = []
+  | get_substitutions1(head :: tail, s) =
+        case (all_except_option(s, head), get_substitutions1(tail, s)) of
+            (NONE, _) => []
+          | (SOME(ls), []) => ls
+          | (SOME(ls), ll) => ls @ ll
+
+
+fun get_substitutions2([], s) = []
+  | get_substitutions2(str_lls, s) =
+        let 
+            fun aux([], acc) = acc
+              | aux(head :: tail, acc) =
+                    case all_except_option(s, head) of
+                        NONE => aux(tail, acc)
+                      | SOME(ls) => aux(tail, acc @ ls)
+        in
+            aux(str_lls, [])
+        end
 
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
