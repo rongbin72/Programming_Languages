@@ -25,7 +25,7 @@ fun get_substitutions1([], s) = []
 
 
 fun get_substitutions2([], s) = []
-  | get_substitutions2(str_lls, s) =
+  | get_substitutions2(sub, s) =
         let 
             fun aux([], acc) = acc
               | aux(head :: tail, acc) =
@@ -33,19 +33,38 @@ fun get_substitutions2([], s) = []
                         NONE => aux(tail, acc)
                       | SOME(ls) => aux(tail, acc @ ls)
         in
-            aux(str_lls, [])
+            aux(sub, [])
         end
+
+
+fun similar_names(sub, {first, middle, last}) =  
+    let
+        val ls = first :: get_substitutions2(sub, first)
+
+        fun aux([], acc) = acc
+           | aux(head :: tail, acc) = aux(tail, acc @ [{first = head, middle = middle, last = last}])
+    in
+        aux(ls, [])
+    end
 
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
 datatype suit = Clubs | Diamonds | Hearts | Spades
-datatype rank = Jack | Queen | King | Ace | Num of int 
+datatype rank = Jack | Queen | King | Ace | Num of int
 type card = suit * rank
 
 datatype color = Red | Black
-datatype move = Discard of card | Draw 
+datatype move = Discard of card | Draw
 
 exception IllegalMove
 
 (* put your solutions for problem 2 here *)
+fun card_color(suit, rank) =
+    case suit of
+        Spades => Black
+      | Clubs  => Black
+      | _      => Red  
+      
+
+(* fun card_value() *)
