@@ -72,3 +72,25 @@ fun card_value(suit, rank) =
         Ace   => 11
       | Num n => n  
       | _     => 10
+
+
+fun remove_card([], c, e) = raise e
+  | remove_card(head :: tail, c, e) =
+        if head = c
+        then tail  (* only remove the first one if c is in the list more than once *)
+        else head :: remove_card(tail, c, e)
+
+
+(* If c is in the list more than once, remove all the cards
+    raise except if c in not in the list *)
+(* fun remove_card([], c, e) = raise e
+  | remove_card(card, c, e) =
+        let
+            fun aux(card, f) =
+                case (card, f) of
+                    ([], true)        => []
+                  | ([], false)       => raise e
+                  | (head :: tail, _) => if head = c then aux(tail, true) else head :: aux(tail, false)
+        in
+            aux(card, false)
+        end *)
