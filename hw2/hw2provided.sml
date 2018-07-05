@@ -112,3 +112,15 @@ fun sum_cards(card_ls) =
     in
         aux(card_ls, 0)
     end
+
+
+fun score(card_ls, goal) =
+    let
+        val sum = sum_cards(card_ls)
+    in
+        case (sum > goal, all_same_color(card_ls)) of
+            (true, true)   => 3 * (sum - goal) div 2
+          | (true, false)  => 3 * (sum - goal)
+          | (false, true)  => (goal - sum) div 2
+          | (false, false) => goal - sum
+    end
