@@ -23,7 +23,7 @@ val test7 = remove_card ([(Hearts, Ace), (Clubs, Ace), (Hearts, Ace)], (Hearts, 
 
 val test8 = all_same_color [(Hearts, Ace), (Hearts, Ace), (Hearts, Ace), (Hearts, Ace), (Hearts, Ace)] = true
 
-(* val test9 = sum_cards [(Clubs, Num 2),(Clubs, Num 2)] = 4 *)
+val test9 = sum_cards [(Clubs, Num 2),(Clubs, Num 2),(Clubs, Num 2),(Clubs, Num 2)] = 8
 
 (* val test10 = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4 *)
 

@@ -101,3 +101,14 @@ fun all_same_color(card_ls) =
         [] => true
       | _ :: [] => true
       | head :: neck :: tail => card_color(head) = card_color(neck) andalso all_same_color(tail)
+
+
+fun sum_cards(card_ls) =
+    let
+        fun aux(ls, acc) =
+            case ls of
+                [] => acc
+              | head :: tail => aux(tail, acc + card_value(head))
+    in
+        aux(card_ls, 0)
+    end
