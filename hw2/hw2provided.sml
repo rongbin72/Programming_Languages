@@ -67,4 +67,8 @@ fun card_color(suit, rank) =
       | _      => Red  
       
 
-(* fun card_value() *)
+fun card_value(suit, rank) =
+    case rank of
+        Ace   => 11
+      | Num n => n  
+      | _     => 10
