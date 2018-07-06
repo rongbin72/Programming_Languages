@@ -99,7 +99,7 @@ fun all_same_color(card_ls) =
     case card_ls of 
         [] => true
       | _ :: [] => true
-      | head :: neck :: tail => card_color(head) = card_color(neck) andalso all_same_color(tail)
+      | head :: neck :: tail => card_color(head) = card_color(neck) andalso all_same_color(neck :: tail)
 
 
 fun sum_cards(card_ls) =
