@@ -18,10 +18,9 @@ fun all_except_option(str, []) = NONE
 
 fun get_substitutions1([], s) = []
   | get_substitutions1(head :: tail, s) =
-        case (all_except_option(s, head), get_substitutions1(tail, s)) of
-            (NONE, _) => []
-          | (SOME(ls), []) => ls
-          | (SOME(ls), ll) => ls @ ll
+        case all_except_option(s, head) of
+            NONE => get_substitutions1(tail, s)
+          | SOME ls => ls @ get_substitutions1(tail, s)  
 
 
 fun get_substitutions2([], s) = []
