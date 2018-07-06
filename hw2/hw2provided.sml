@@ -128,6 +128,7 @@ fun score(card_ls, goal) =
 fun officiate(card_ls, move_ls, goal) =
     let
         fun aux(cards, held_cards, [], current_score) = current_score
+          | aux([], held_cards, moves, current_score) = current_score
           | aux(h_card :: t_cards, held_cards, h_move :: t_moves, current_score) =  
                 case h_move of
                     Discard c => let
