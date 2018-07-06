@@ -124,3 +124,25 @@ fun score(card_ls, goal) =
           | (false, true)  => (goal - sum) div 2
           | (false, false) => goal - sum
     end
+
+
+fun officiate(card_ls, move_ls, goal) =
+    let
+        fun aux(cards, held_cards, [], current_score) = current_score
+          | aux(h_card :: t_cards, held_cards, h_move :: t_moves, current_score) =  
+                case h_move of
+                    Discard c => let
+                                    val current_held = remove_card(held_cards, c, IllegalMove)
+                                 in
+                                    aux(h_card :: t_cards, current_held, t_moves, score(current_held, goal))
+                                 end
+                  | Draw => let
+                                val current_held = h_card :: held_cards
+                            in
+                                if sum_cards(current_held) > goal
+                                then current_score
+                                else aux(t_cards, current_held,t_moves, score(current_held, goal))
+                            end
+    in
+        aux(card_ls, [], move_ls, 0)
+    end

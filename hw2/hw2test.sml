@@ -27,7 +27,7 @@ val test9 = sum_cards [(Clubs, Num 2),(Clubs, Num 2),(Clubs, Num 2),(Clubs, Num 
 
 val test10 = score ([(Hearts, Num 2),(Clubs, Num 10)],10) = 6
 
-(* val test11 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6 *)
+val test11 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
 
 (* val test12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
                         [Draw,Draw,Draw,Draw,Draw],
