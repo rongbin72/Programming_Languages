@@ -125,7 +125,7 @@ fun score(card_ls, goal) =
     end
 
 
-fun officiate(card_ls, move_ls, goal) =
+(* fun officiate(card_ls, move_ls, goal) =
     let
         fun aux(cards, held_cards, [], current_score) = current_score
           | aux([], held_cards, moves, current_score) = current_score
@@ -145,4 +145,23 @@ fun officiate(card_ls, move_ls, goal) =
                             end
     in
         aux(card_ls, [], move_ls, 0)
+    end *)
+    
+(* Sample solution for this question *)
+fun officiate (cards,plays,goal) =
+    let 
+        fun loop (current_cards,cards_left,plays_left) =
+            case plays_left of
+                [] => score(current_cards,goal)
+              | (Discard c)::tail => 
+                loop (remove_card(current_cards,c,IllegalMove),cards_left,tail)
+              | Draw::tail =>
+                (* note: must score immediately if go over goal! *)
+                case cards_left of
+                    [] => score(current_cards,goal)
+                  | c::rest => if sum_cards (c::current_cards) > goal
+                               then score(c::current_cards,goal)
+                               else loop (c::current_cards,rest,tail)
+    in 
+        loop ([],cards,plays)
     end
