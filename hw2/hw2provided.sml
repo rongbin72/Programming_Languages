@@ -146,7 +146,7 @@ fun score(card_ls, goal) =
     in
         aux(card_ls, [], move_ls, 0)
     end *)
-    
+
 (* Sample solution for this question *)
 fun officiate (cards,plays,goal) =
     let 
