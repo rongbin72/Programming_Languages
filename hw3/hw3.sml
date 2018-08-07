@@ -99,6 +99,7 @@ fun check_pat p =
 	let
 	  	fun str_ls (Variable v) = [v]
 		  | str_ls (TupleP t) = List.foldl (fn (pt, acc) => (str_ls pt) @ acc) [] t
+		  | str_ls (ConstructorP (_, cp)) = str_ls cp
 		  | str_ls _ = []
 		 
 		fun noRepeat [] = true
@@ -108,3 +109,19 @@ fun check_pat p =
 	end
 
 
+fun match(v, p) =
+	case (v, p) of
+		(_, Wildcard) => SOME []
+	  | (_, Variable var) => SOME [(var, v)]
+	  | (Unit, UnitP) => SOME []
+	  | (Const c, ConstP cp) => if c = cp then SOME [] else NONE
+	  | (Tuple t, TupleP tp) => if List.length t = List.length tp
+	  							then all_answers (fn (t', tp') => match(t', tp')) (ListPair.zip(t, tp))
+								else NONE
+	  | (Constructor(s1, p1), ConstructorP(s2, p2)) => if s1 = s2 then match(p1, p2) else NONE
+	  | _ => NONE
+
+
+
+fun first_match v p =
+	SOME(first_answer (fn p => match(v, p)) p) handle NoAnswer => NONE
