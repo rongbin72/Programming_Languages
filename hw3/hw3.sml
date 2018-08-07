@@ -65,11 +65,28 @@ val longest_capitalized = longest_string1 o only_capitals
 val rev_string = String.implode o List.rev o String.explode
 
 
-fun first_answer f ls =
-	case ls of
-		[] => raise NoAnswer
-	  | x :: xs => case f x of
-	  					SOME v => v
-					  | NONE => first_answer f xs
-					 
+fun first_answer f [] = raise NoAnswer
+  | first_answer f (x :: xs) =
+		case f x of
+	  		SOME v => v
+		  | NONE => first_answer f xs
+
+
+fun all_answers f [] = SOME []
+  | all_answers f ls = 
+		let
+			fun aux acc [] = SOME acc
+			  | aux acc	(NONE :: xs) = NONE
+		 	  | aux acc (SOME(x) :: xs) = aux (x @ acc) xs
+		in
+		  	aux [] (map f ls)
+		end
+
+
+fun count_wildcards p =
+	g (fn _ => 1) (fn _ => 0) p
+
+
+fun 
+
 	  			   
