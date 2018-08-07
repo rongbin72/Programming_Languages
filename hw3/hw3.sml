@@ -41,6 +41,13 @@ fun only_capitals ls =
 
 
 fun longest_string1 ls =
+	foldl (fn (x, y) => if String.size x > String.size y then x else y) "" ls
+
+
+fun longest_string2 ls =
 	foldl (fn (x, y) => if String.size x >= String.size y then x else y) "" ls
+
+
+
 
 		
