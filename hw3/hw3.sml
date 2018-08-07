@@ -95,7 +95,16 @@ fun count_some_var(str, p) =
 	g (fn _ => 0) (fn x => if x = str then 1 else 0) p
 
 
+fun check_pat p =
+	let
+	  	fun str_ls (Variable v) = [v]
+		  | str_ls (TupleP t) = List.foldl (fn (pt, acc) => (str_ls pt) @ acc) [] t
+		  | str_ls _ = []
+		 
+		fun noRepeat [] = true
+		  | noRepeat (x :: xs) = not (List.exists (fn s => s=x) xs) andalso noRepeat xs
+	in
+		(noRepeat o str_ls) p
+	end
 
 
-
-	  			   
