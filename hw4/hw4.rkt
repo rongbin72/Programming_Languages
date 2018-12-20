@@ -57,14 +57,12 @@
 
 
 (define (cached-assoc xs n)
-  (letrec ([memo (make-vector n #f)]
-           [i 0])
+    (letrec ([memo (make-vector n #f)]
+            [i 0])
     (lambda (x)
-      (if (vector-assoc x memo)
-          (vector-assoc x memo)
-          (let ([val (assoc x xs)])
-            (begin
-              (vector-set! memo i val)
-              (set! i
-                    (remainder (+ i 1) n))
-              (vector-assoc x memo)))))))
+        (or (vector-assoc x memo)
+            (let ([res (assoc x xs)])
+                (and res (begin
+                         (vector-set! memo i res)
+                         (set! i (remainder (+ i 1) n))
+                          res)))))))
